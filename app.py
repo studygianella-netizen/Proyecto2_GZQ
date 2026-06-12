@@ -12,10 +12,13 @@ st.sidebar.image("python.png")
 
 st.title("PROYECTO 2")
 
-st.write("Elaborado por: Gianella Zorrilla Quispe")
-st.write("Carrera: Administración de empresas")
-st.write ("Curso: Especialización en Python potenciado con IA - Edición - 58")
-st.write ("Año: 2026")
+ st.subheader("👨‍💻 Datos del Autor")
+
+        st.write("**Elaborado por:** Gianella Zorrilla Quispe")
+        st.write("**Curso:**  Especialización en Python potenciado con IA - Edición - 58")
+        st.write("**Institución:** DMC Institute")
+        st.write("**Año:** 2026")
+
 st.image("fondo.png")
 
 
@@ -42,21 +45,9 @@ if opcion == "🏠 Home":
     """)
 
     st.divider()
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.subheader("👨‍💻 Datos del Autor")
-
-        st.write("**Nombre:** Alejandro Palomino")
-        st.write("**Curso:** Especialización Python for Analytics")
-        st.write("**Institución:** DMC Institute")
-        st.write("**Año:** 2026")
-
-    with col2:
-        st.subheader("📁 Información del Dataset")
-
-        st.write("""
+    
+    st.subheader("📁 Información del Dataset")
+    st.markdown ("""
         El dataset Bank Marketing contiene información de campañas de marketing
         realizadas por una institución financiera.
 
