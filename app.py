@@ -12,15 +12,14 @@ st.sidebar.image("python.png")
 
 st.title("PROYECTO 2")
 
- st.subheader("👨‍💻 Datos del Autor")
+st.subheader("👨‍💻 Datos del Autor")
 
-        st.write("**Elaborado por:** Gianella Zorrilla Quispe")
-        st.write("**Curso:**  Especialización en Python potenciado con IA - Edición - 58")
-        st.write("**Institución:** DMC Institute")
-        st.write("**Año:** 2026")
+st.write("**Elaborado por:** Gianella Zorrilla Quispe")
+st.write("**Curso:**  Especialización en Python potenciado con IA - Edición - 58")
+st.write("**Institución:** DMC Institute")
+st.write("**Año:** 2026")
 
 st.image("fondo.png")
-
 
 st.sidebar.title("📌 Menú Principal")
 opcion = st.sidebar.radio(
