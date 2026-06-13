@@ -296,30 +296,24 @@ with tabs[0]:
 # =====================================================
 # Ítem 5: Distribución de variables numéricas
 # =====================================================
-           with tabs[4]:
+    with tabs[4]:
 
             st.header("Ítem 5: Distribución de Variables Numéricas")
 
             numericas = analyzer.variables_numericas()
 
-            variable = st.selectbox(
-                "Seleccione una variable",
-                numericas
-            )
+            variable = st.selectbox("Seleccione una variable", numericas)
 
             fig, ax = plt.subplots(figsize=(8,4))
 
             sns.histplot(
                 df[variable],
                 kde=True,
-                ax=ax
-            )
+                ax=ax)
 
             st.pyplot(fig)
 
-            st.success(
-                f"Distribución observada para la variable {variable}"
-            )
+            st.success(f"Distribución observada para la variable {variable}")
 # =====================================================
 # Ítem 6: Análisis de variables categóricas 
 # =====================================================
