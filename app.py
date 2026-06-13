@@ -81,3 +81,52 @@ if opcion == "🏠 Home":
     visualizaciones interactivas y análisis de variables numéricas y categóricas,
     facilitando la identificación de hallazgos relevantes para la toma de decisiones.
     """)
+
+# =====================================================
+# CARGA DEL DATASET
+# =====================================================
+
+elif opcion == "📂 Carga de Dataset":
+
+    st.title("📂 Carga del Dataset")
+
+    st.markdown("""
+    En esta sección se cargará el archivo CSV que será utilizado
+    para el Análisis Exploratorio de Datos (EDA).
+    """)
+
+    archivo = st.file_uploader(
+        "Seleccione el archivo BankMarketing.csv",
+        type=["csv"]
+    )
+
+    if archivo is not None:
+
+        try:
+            import pandas as pd
+
+            df = pd.read_csv(archivo)
+
+            st.success("✅ Archivo cargado correctamente")
+
+            st.subheader("Vista previa del Dataset")
+
+            st.dataframe(df.head())
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.metric("Filas", df.shape[0])
+
+            with col2:
+                st.metric("Columnas", df.shape[1])
+
+            st.subheader("Información General")
+
+            st.write(f"El dataset contiene **{df.shape[0]} filas** y **{df.shape[1]} columnas**.")
+
+        except Exception as e:
+            st.error(f"Error al cargar el archivo: {e}")
+
+    else:
+        st.warning("⚠️ Debe cargar un archivo CSV para continuar.")
