@@ -178,3 +178,166 @@ class DataAnalyzer:
 
     def moda(self):
         return self.df.mode().iloc[0]
+
+# =====================================================
+# EDA
+# =====================================================
+
+elif opcion == "📊 Análisis Exploratorio (EDA)":
+
+    st.title("📊 Análisis Exploratorio de Datos")
+
+    if "df" not in st.session_state:
+
+        st.warning("⚠️ Primero debe cargar el dataset.")
+
+    else:
+
+        df = st.session_state["df"]
+
+        analyzer = DataAnalyzer(df)
+
+        tabs = st.tabs([
+            "Información General",
+            "Clasificación Variables",
+            "Estadísticas",
+            "Valores Faltantes",
+            "Distribuciones" ])
+# =====================================================
+# Ítem 1: Información general del dataset 
+# =====================================================
+with tabs[0]:
+
+            st.header("Ítem 1: Información General")
+
+            st.subheader("Info()")
+
+            st.code(analyzer.dataset_info())
+
+            st.subheader("Tipos de Datos")
+
+            st.dataframe(analyzer.tipos_datos().reset_index())
+
+            st.subheader("Valores Nulos")
+
+            st.dataframe(analyzer.valores_nulos().reset_index())
+# =====================================================
+# Ítem 2: Clasificación de variables 
+# =====================================================
+    with tabs[1]:
+
+            st.header("Ítem 2: Clasificación de Variables")
+
+            numericas = analyzer.variables_numericas()
+            categoricas = analyzer.variables_categoricas()
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+
+                st.success(f"Variables Numéricas ({len(numericas)})")
+
+                st.write(numericas)
+
+            with col2:
+
+                st.info(f"Variables Categóricas ({len(categoricas)})")
+
+                st.write(categoricas)
+
+# =====================================================
+# Ítem 3: Estadísticas descriptivas 
+# =====================================================
+ with tabs[2]:
+
+            st.header("Ítem 3: Estadísticas Descriptivas")
+
+            st.dataframe(analyzer.estadisticas())
+
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+
+                st.subheader("Media")
+
+                st.dataframe(analyzer.media())
+
+            with col2:
+
+                st.subheader("Mediana")
+
+                st.dataframe( analyzer.mediana())
+
+            with col3:
+
+                st.subheader("Moda")
+
+                st.dataframe(analyzer.moda())
+# =====================================================
+# Ítem 4: Análisis de valores faltantes
+# =====================================================
+  with tabs[3]:
+
+            st.header("Ítem 4: Valores Faltantes")
+
+            nulos = analyzer.valores_nulos()
+
+            st.dataframe(nulos)
+
+            fig, ax = plt.subplots(figsize=(10,4))
+
+            nulos.plot(kind="bar",ax=ax)
+
+            plt.xticks(rotation=90)
+
+            st.pyplot(fig)
+
+            st.info("El gráfico muestra la cantidad de valores faltantes por variable." )     
+# =====================================================
+# Ítem 5: Distribución de variables numéricas
+# =====================================================
+           with tabs[4]:
+
+            st.header("Ítem 5: Distribución de Variables Numéricas")
+
+            numericas = analyzer.variables_numericas()
+
+            variable = st.selectbox(
+                "Seleccione una variable",
+                numericas
+            )
+
+            fig, ax = plt.subplots(figsize=(8,4))
+
+            sns.histplot(
+                df[variable],
+                kde=True,
+                ax=ax
+            )
+
+            st.pyplot(fig)
+
+            st.success(
+                f"Distribución observada para la variable {variable}"
+            )
+# =====================================================
+# Ítem 6: Análisis de variables categóricas 
+# =====================================================
+
+# =====================================================
+# Ítem 7: Análisis bivariado (numérico vs categórico)
+# =====================================================
+
+# =====================================================
+# Ítem 8: Análisis bivariado (categórico vs categórico)
+# =====================================================
+
+# =====================================================
+# Ítem 9: Análisis basado en parámetros seleccionados
+# =====================================================
+
+# =====================================================
+# Ítem 10: Hallazgos clave 
+# =====================================================
+                
+
