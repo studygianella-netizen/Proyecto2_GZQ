@@ -1,4 +1,10 @@
 import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from io import StringIO
+import contextlib
 
 # =====================================================
 # CONFIGURACIÓN DE LA APLICACIÓN
@@ -22,13 +28,12 @@ st.write("**Año:** 2026")
 st.image("fondo.png")
 
 st.sidebar.title("📌 Menú Principal")
+
 opcion = st.sidebar.radio(
     "Navegación",
-    [
-        "🏠 Home",
-        "📂 Carga de Dataset"
-    ]
-)
+    [   "🏠 Home",
+        "📂 Carga de Dataset",
+        "📊 Análisis Exploratorio (EDA)" ])
 # =====================================================
 # HOME
 # =====================================================
@@ -131,3 +136,45 @@ elif opcion == "📂 Carga de Dataset":
 
     else:
         st.warning("⚠️ Debe cargar un archivo CSV para continuar.")
+
+# =====================================================
+# CLASE DATA ANALYZER
+# =====================================================
+
+class DataAnalyzer:
+
+    def __init__(self, dataframe):
+        self.df = dataframe
+
+    def dataset_info(self):
+
+        buffer = StringIO()
+
+        with contextlib.redirect_stdout(buffer):
+            self.df.info()
+
+        return buffer.getvalue()
+
+    def tipos_datos(self):
+        return self.df.dtypes
+
+    def valores_nulos(self):
+        return self.df.isnull().sum()
+
+    def variables_numericas(self):
+        return self.df.select_dtypes(include=np.number).columns.tolist()
+
+    def variables_categoricas(self):
+        return self.df.select_dtypes(exclude=np.number).columns.tolist()
+
+    def estadisticas(self):
+        return self.df.describe()
+
+    def media(self):
+        return self.df.select_dtypes(include=np.number).mean()
+
+    def mediana(self):
+        return self.df.select_dtypes(include=np.number).median()
+
+    def moda(self):
+        return self.df.mode().iloc[0]
