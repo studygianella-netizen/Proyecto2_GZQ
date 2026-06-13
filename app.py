@@ -106,6 +106,7 @@ elif opcion == "📂 Carga de Dataset":
             import pandas as pd
 
             df = pd.read_csv(archivo)
+            st.session_state["df"] = df
 
             st.success("✅ Archivo cargado correctamente")
 
