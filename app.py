@@ -24,7 +24,11 @@ st.image("fondo.png")
 st.sidebar.title("📌 Menú Principal")
 opcion = st.sidebar.radio(
     "Navegación",
-    ["🏠 Home"])
+    [
+        "🏠 Home",
+        "📂 Carga de Dataset"
+    ]
+)
 # =====================================================
 # HOME
 # =====================================================
@@ -37,11 +41,7 @@ if opcion == "🏠 Home":
     ### Objetivo del Proyecto
     Este proyecto tiene como finalidad realizar un Análisis Exploratorio de Datos (EDA)
     sobre el dataset **Bank Marketing**, identificando patrones, tendencias y relaciones
-    entre las variables que influyen en la aceptación de campañas de marketing bancario.
-
-    La aplicación ha sido desarrollada utilizando Python y Streamlit como parte de la
-    Especialización en Python for Analytics.
-    """)
+    entre las variables que influyen en la aceptación de campañas de marketing bancario.""")
 
     st.divider()
     
