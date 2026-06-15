@@ -421,6 +421,33 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
         # =================================================
         # ITEM 8
         # =================================================
+
+        with tabs[7]:
+
+            st.header("Ítem 8: Análisis Bivariado (Categórico vs Categórico)")
+
+            categoricas = analyzer.variables_categoricas()
+
+            variable_cat = st.selectbox(
+                "Seleccione variable categórica",
+                categoricas,
+                key="cat_bivariado")
+
+            if "y" in df.columns:
+
+                tabla = pd.crosstab(
+                df[variable_cat],
+                df["y"] )
+
+            st.dataframe(tabla)
+
+            fig, ax = plt.subplots(figsize=(10,5))
+
+            tabla.plot(
+                kind="bar",
+                ax=ax)
+
+            st.pyplot(fig)
         # =================================================
         # ITEM 9
         # =================================================
