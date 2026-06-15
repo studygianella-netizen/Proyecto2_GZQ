@@ -7,6 +7,48 @@ from io import StringIO
 import contextlib
 
 # =====================================================
+# CLASE DATA ANALYZER
+# =====================================================
+
+class DataAnalyzer:
+
+    def __init__(self, dataframe):
+        self.df = dataframe
+
+    def dataset_info(self):
+
+        buffer = StringIO()
+
+        with contextlib.redirect_stdout(buffer):
+            self.df.info()
+
+        return buffer.getvalue()
+
+    def tipos_datos(self):
+        return self.df.dtypes
+
+    def valores_nulos(self):
+        return self.df.isnull().sum()
+
+    def variables_numericas(self):
+        return self.df.select_dtypes(include=np.number).columns.tolist()
+
+    def variables_categoricas(self):
+        return self.df.select_dtypes(exclude=np.number).columns.tolist()
+
+    def estadisticas(self):
+        return self.df.describe()
+
+    def media(self):
+        return self.df.select_dtypes(include=np.number).mean()
+
+    def mediana(self):
+        return self.df.select_dtypes(include=np.number).median()
+
+    def moda(self):
+        return self.df.mode().iloc[0]
+
+# =====================================================
 # CONFIGURACIÓN DE LA APLICACIÓN
 # =====================================================
 st.set_page_config(
@@ -137,47 +179,7 @@ elif opcion == "📂 Carga de Dataset":
     else:
         st.warning("⚠️ Debe cargar un archivo CSV para continuar.")
 
-# =====================================================
-# CLASE DATA ANALYZER
-# =====================================================
 
-class DataAnalyzer:
-
-    def __init__(self, dataframe):
-        self.df = dataframe
-
-    def dataset_info(self):
-
-        buffer = StringIO()
-
-        with contextlib.redirect_stdout(buffer):
-            self.df.info()
-
-        return buffer.getvalue()
-
-    def tipos_datos(self):
-        return self.df.dtypes
-
-    def valores_nulos(self):
-        return self.df.isnull().sum()
-
-    def variables_numericas(self):
-        return self.df.select_dtypes(include=np.number).columns.tolist()
-
-    def variables_categoricas(self):
-        return self.df.select_dtypes(exclude=np.number).columns.tolist()
-
-    def estadisticas(self):
-        return self.df.describe()
-
-    def media(self):
-        return self.df.select_dtypes(include=np.number).mean()
-
-    def mediana(self):
-        return self.df.select_dtypes(include=np.number).median()
-
-    def moda(self):
-        return self.df.mode().iloc[0]
 
 # =====================================================
 # EDA
@@ -202,11 +204,14 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
             "Clasificación Variables",
             "Estadísticas",
             "Valores Faltantes",
-            "Distribuciones" ])
+            "Distribuciones"
+        ])
+
+
 # =====================================================
 # Ítem 1: Información general del dataset 
 # =====================================================
-with tabs[0]:
+        with tabs[0]:
 
             st.header("Ítem 1: Información General")
 
@@ -224,7 +229,7 @@ with tabs[0]:
 # =====================================================
 # Ítem 2: Clasificación de variables 
 # =====================================================
-    with tabs[1]:
+        with tabs[1]:
 
             st.header("Ítem 2: Clasificación de Variables")
 
@@ -248,7 +253,7 @@ with tabs[0]:
 # =====================================================
 # Ítem 3: Estadísticas descriptivas 
 # =====================================================
- with tabs[2]:
+         with tabs[2]:
 
             st.header("Ítem 3: Estadísticas Descriptivas")
 
@@ -276,7 +281,7 @@ with tabs[0]:
 # =====================================================
 # Ítem 4: Análisis de valores faltantes
 # =====================================================
-  with tabs[3]:
+        with tabs[3]:
 
             st.header("Ítem 4: Valores Faltantes")
 
@@ -296,7 +301,7 @@ with tabs[0]:
 # =====================================================
 # Ítem 5: Distribución de variables numéricas
 # =====================================================
-    with tabs[4]:
+        with tabs[4]:
 
             st.header("Ítem 5: Distribución de Variables Numéricas")
 
