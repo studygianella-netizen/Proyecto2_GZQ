@@ -127,9 +127,15 @@ if opcion == "🏠 Home":
     st.markdown("""
     El dataset Bank Marketing contiene información de campañas de marketing
     realizadas por una institución financiera.
+     
+     Cada registro representa la interacción de un cliente con la institución e incluye
+    variables demográficas, financieras y de comportamiento, así como el resultado
+    final de la campaña, indicando si el cliente aceptó o no la oferta propuesta.
 
-    Su objetivo es analizar las características de los clientes y determinar
-    qué factores están asociados a la aceptación de una campaña comercial.
+    El análisis de esta información permite comprender mejor las características
+    de los clientes y generar conocimientos útiles para la toma de decisiones
+    comerciales.
+
     """)
 
     st.divider()
