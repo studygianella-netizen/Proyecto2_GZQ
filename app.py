@@ -253,7 +253,7 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
 # =====================================================
 # Ítem 3: Estadísticas descriptivas 
 # =====================================================
-         with tabs[2]:
+        with tabs[2]:
 
             st.header("Ítem 3: Estadísticas Descriptivas")
 
