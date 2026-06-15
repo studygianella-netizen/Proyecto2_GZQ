@@ -56,6 +56,18 @@ class DataAnalyzer:
 
     def moda(self):
         return self.df.mode().iloc[0]
+        
+    def histograma(self, variable):
+
+        fig, ax = plt.subplots(figsize=(8,4))
+
+        sns.histplot(
+            self.df[variable],
+            kde=True,
+            ax=ax
+        )
+
+        return fig
 
 # =====================================================
 # SIDEBAR
@@ -354,7 +366,7 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
                 kde=True,
                 ax=ax)
 
-            st.pyplot(fig)
+            st.pyplot( analyzer.histograma(variable))
 
             st.success(
                 f"Distribución observada para la variable: {variable}"
@@ -484,47 +496,81 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
         # =================================================
         # ITEM 10
         # =================================================
-        
         with tabs[9]:
 
             st.header("Ítem 10: Hallazgos Clave")
 
-            col1, col2 = st.columns(2)
+            col1, col2, col3 = st.columns(3)
 
-        with col1:
+            with col1:
+                st.metric(
+                    "Registros",
+                    df.shape[0])
 
-            st.metric(
-                "Registros",
-                df.shape[0])
-
-            st.metric(
+            with col2:
+                st.metric(
                 "Variables",
                 df.shape[1])
 
-        with col2:
+            with col3:
 
-            if "y" in df.columns:
+                if "y" in df.columns:
 
-                aceptacion = round(
-                    (df["y"]=="yes").mean()*100,
-                    2)
+                    aceptacion = round(
+                        (df["y"] == "yes").mean() * 100,
+                        2
+                        )
+
+                    st.metric(
+                        "Aceptación",
+                        f"{aceptacion}%"
+                        )
+
+            st.divider()
+
+            st.subheader("Indicadores Estadísticos")
+
+            c1, c2 = st.columns(2)
+
+            with c1:
 
                 st.metric(
-                    "Tasa de Aceptación (%)",
-                    aceptacion)
+                    "Edad Promedio",
+                    round(df["age"].mean(),2)
+                    )
 
-        st.success("""
-        Hallazgos sugeridos:
+                st.metric(
+                    "Edad Mediana",
+                    round(df["age"].median(),2)
+                    )
 
-        • Identificar los grupos con mayor aceptación de campañas.
+            with c2:
 
-        • Detectar variables con diferencias importantes entre clientes que aceptan y no aceptan.
+                st.metric(
+                    "Duración Promedio",
+                    round(df["duration"].mean(),2)
+                    )
 
-        • Analizar la influencia de la duración de la llamada.
+            st.metric(
+                "Duración Mediana",
+                round(df["duration"].median(),2)
+                )
 
-        • Evaluar el comportamiento según nivel educativo y canal de contacto.
+            st.divider()
 
-        • Generar recomendaciones para optimizar futuras campañas.
-        """)
+            st.success("""
+            Hallazgos principales:
 
-        
+            • La edad presenta una distribución amplia entre los clientes.
+
+            • La duración del contacto es una de las variables más relevantes del dataset.
+
+            • Existen diferencias entre los grupos que aceptan y no aceptan la campaña.
+
+            • Algunas categorías muestran comportamientos distintos frente a la aceptación.
+
+            • El análisis exploratorio permite identificar segmentos de clientes con mayor potencial para futuras campañas.
+            """)
+
+       
+             
