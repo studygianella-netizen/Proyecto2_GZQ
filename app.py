@@ -406,18 +406,18 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
 
             if "y" in df.columns:
 
-            fig, ax = plt.subplots(figsize=(8,5))
+                fig, ax = plt.subplots(figsize=(8,5))
 
-            sns.boxplot(
+                sns.boxplot(
                     data=df,
                     x="y",
                     y=variable_num,
                     ax=ax)
 
-             st.pyplot(fig)
+                st.pyplot(fig)
 
-            st.info(
-                f"Comparación de {variable_num} respecto a la aceptación de la campaña." )
+                st.info(
+                    f"Comparación de {variable_num} respecto a la aceptación de la campaña." )
         # =================================================
         # ITEM 8
         # =================================================
