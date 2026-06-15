@@ -85,7 +85,8 @@ opcion = st.sidebar.radio(
     [
         "🏠 Home",
         "📂 Carga de Dataset",
-        "📊 Análisis Exploratorio (EDA)"
+        "📊 Análisis Exploratorio (EDA)",
+        "📌 Conclusiones"
     ]
 )
 
@@ -572,5 +573,26 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
             • El análisis exploratorio permite identificar segmentos de clientes con mayor potencial para futuras campañas.
             """)
 
-       
+elif opcion == "📌 Conclusiones":
+
+    st.title("📌 Conclusiones Finales")
+
+    st.subheader("📌 Conclusiones Finales")
+
+    st.markdown("""
+        ### 1. Influencia de la duración del contacto
+        Se observó que los clientes con mayor duración de contacto tienden a presentar una mayor tasa de aceptación de la campaña. Esto sugiere que la calidad y profundidad de la interacción comercial puede influir significativamente en los resultados obtenidos.
+
+        ### 2. Diferencias entre segmentos de clientes
+        El análisis de variables demográficas y socioeconómicas mostró diferencias en el comportamiento de aceptación entre distintos grupos de clientes. Esto permite identificar segmentos con mayor potencial para futuras campañas.
+
+        ### 3. Importancia de los canales de comunicación
+        Los resultados evidencian que algunos canales de contacto presentan mejores niveles de respuesta que otros. Optimizar el uso de los canales más efectivos podría mejorar la eficiencia de las campañas de marketing.
+
+        ### 4. Valor del análisis exploratorio para la toma de decisiones
+        La exploración de datos permitió identificar patrones, distribuciones y relaciones entre variables que facilitan una mejor comprensión del comportamiento de los clientes y apoyan la toma de decisiones basada en datos.
+
+        ### 5. Oportunidades de optimización comercial
+        La información obtenida permite orientar mejor los recursos comerciales, enfocando esfuerzos en los perfiles de clientes y estrategias de contacto que muestran mayores probabilidades de generar resultados positivos.
+        """)
              
