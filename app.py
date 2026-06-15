@@ -184,14 +184,13 @@ elif opcion == "📂 Carga de Dataset":
 # =====================================================
 # EDA
 # =====================================================
-
 elif opcion == "📊 Análisis Exploratorio (EDA)":
 
     st.title("📊 Análisis Exploratorio de Datos")
 
     if "df" not in st.session_state:
 
-        st.warning("⚠️ Primero debe cargar el dataset.")
+        st.warning("⚠️ Primero debe cargar el dataset en el módulo 'Carga de Dataset'.")
 
     else:
 
@@ -207,10 +206,10 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
             "Distribuciones"
         ])
 
+        # =================================================
+        # ITEM 1
+        # =================================================
 
-# =====================================================
-# Ítem 1: Información general del dataset 
-# =====================================================
         with tabs[0]:
 
             st.header("Ítem 1: Información General")
@@ -221,14 +220,26 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
 
             st.subheader("Tipos de Datos")
 
-            st.dataframe(analyzer.tipos_datos().reset_index())
+            tipos_df = pd.DataFrame({
+                "Variable": analyzer.tipos_datos().index,
+                "Tipo": analyzer.tipos_datos().values
+            })
+
+            st.dataframe(tipos_df)
 
             st.subheader("Valores Nulos")
 
-            st.dataframe(analyzer.valores_nulos().reset_index())
-# =====================================================
-# Ítem 2: Clasificación de variables 
-# =====================================================
+            nulos_df = pd.DataFrame({
+                "Variable": analyzer.valores_nulos().index,
+                "Nulos": analyzer.valores_nulos().values
+            })
+
+            st.dataframe(nulos_df)
+
+        # =================================================
+        # ITEM 2
+        # =================================================
+
         with tabs[1]:
 
             st.header("Ítem 2: Clasificación de Variables")
@@ -241,18 +252,17 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
             with col1:
 
                 st.success(f"Variables Numéricas ({len(numericas)})")
-
                 st.write(numericas)
 
             with col2:
 
                 st.info(f"Variables Categóricas ({len(categoricas)})")
-
                 st.write(categoricas)
 
-# =====================================================
-# Ítem 3: Estadísticas descriptivas 
-# =====================================================
+        # =================================================
+        # ITEM 3
+        # =================================================
+
         with tabs[2]:
 
             st.header("Ítem 3: Estadísticas Descriptivas")
@@ -265,22 +275,34 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
 
                 st.subheader("Media")
 
-                st.dataframe(analyzer.media())
+                st.dataframe(
+                    analyzer.media().reset_index().rename(
+                        columns={"index": "Variable", 0: "Media"}
+                    )
+                )
 
             with col2:
 
                 st.subheader("Mediana")
 
-                st.dataframe( analyzer.mediana())
+                st.dataframe(
+                    analyzer.mediana().reset_index().rename(
+                        columns={"index": "Variable", 0: "Mediana"}
+                    )
+                )
 
             with col3:
 
                 st.subheader("Moda")
 
-                st.dataframe(analyzer.moda())
-# =====================================================
-# Ítem 4: Análisis de valores faltantes
-# =====================================================
+                moda_df = analyzer.moda()
+
+                st.dataframe(moda_df)
+
+        # =================================================
+        # ITEM 4
+        # =================================================
+
         with tabs[3]:
 
             st.header("Ítem 4: Valores Faltantes")
@@ -289,54 +311,47 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
 
             st.dataframe(nulos)
 
-            fig, ax = plt.subplots(figsize=(10,4))
+            fig, ax = plt.subplots(figsize=(10, 4))
 
-            nulos.plot(kind="bar",ax=ax)
+            nulos.plot(
+                kind="bar",
+                ax=ax
+            )
 
             plt.xticks(rotation=90)
 
             st.pyplot(fig)
 
-            st.info("El gráfico muestra la cantidad de valores faltantes por variable." )     
-# =====================================================
-# Ítem 5: Distribución de variables numéricas
-# =====================================================
+            st.info(
+                "Visualización de valores faltantes por variable."
+            )
+
+        # =================================================
+        # ITEM 5
+        # =================================================
+
         with tabs[4]:
 
             st.header("Ítem 5: Distribución de Variables Numéricas")
 
             numericas = analyzer.variables_numericas()
 
-            variable = st.selectbox("Seleccione una variable", numericas)
+            variable = st.selectbox(
+                "Seleccione una variable numérica",
+                numericas
+            )
 
-            fig, ax = plt.subplots(figsize=(8,4))
+            fig, ax = plt.subplots(figsize=(8, 4))
 
             sns.histplot(
-                df[variable],
+                data=df,
+                x=variable,
                 kde=True,
-                ax=ax)
+                ax=ax
+            )
 
             st.pyplot(fig)
 
-            st.success(f"Distribución observada para la variable {variable}")
-# =====================================================
-# Ítem 6: Análisis de variables categóricas 
-# =====================================================
-
-# =====================================================
-# Ítem 7: Análisis bivariado (numérico vs categórico)
-# =====================================================
-
-# =====================================================
-# Ítem 8: Análisis bivariado (categórico vs categórico)
-# =====================================================
-
-# =====================================================
-# Ítem 9: Análisis basado en parámetros seleccionados
-# =====================================================
-
-# =====================================================
-# Ítem 10: Hallazgos clave 
-# =====================================================
-                
-
+            st.success(
+                f"Distribución observada para la variable: {variable}"
+            )
