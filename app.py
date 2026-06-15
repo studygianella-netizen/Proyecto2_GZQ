@@ -393,6 +393,31 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
         # =================================================
         # ITEM 7
         # =================================================
+        with tabs[6]:
+
+            st.header("Ítem 7: Análisis Bivariado (Numérico vs Categórico)")
+
+            numericas = analyzer.variables_numericas()
+
+            variable_num = st.selectbox(
+                "Variable numérica",
+                numericas,
+                key="num_bivariado")
+
+            if "y" in df.columns:
+
+            fig, ax = plt.subplots(figsize=(8,5))
+
+            sns.boxplot(
+                    data=df,
+                    x="y",
+                    y=variable_num,
+                    ax=ax)
+
+             st.pyplot(fig)
+
+            st.info(
+                f"Comparación de {variable_num} respecto a la aceptación de la campaña." )
         # =================================================
         # ITEM 8
         # =================================================
