@@ -154,7 +154,7 @@ elif opcion == "📂 Carga de Dataset":
 
         try:
 
-            df = pd.read_csv(archivo)
+            df = pd.read_csv(archivo, sep=";")
 
             st.session_state["df"] = df
 
