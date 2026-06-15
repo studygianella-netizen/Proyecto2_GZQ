@@ -451,9 +451,80 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
         # =================================================
         # ITEM 9
         # =================================================
+        with tabs[8]:
+
+            st.header("Ítem 9: Análisis Basado en Parámetros")
+
+            columnas = st.multiselect(
+                "Seleccione columnas",
+                df.columns.tolist(),
+                default=df.columns[:3])
+
+            if columnas:
+
+                st.dataframe(df[columnas].head())
+
+            filas = st.slider(
+                "Cantidad de filas a visualizar",
+                5,
+                50,
+                10)
+
+            st.dataframe(df.head(filas))
+
+            mostrar_estadisticas = st.checkbox(
+                "Mostrar estadísticas descriptivas")
+
+            if mostrar_estadisticas:
+
+                st.dataframe(
+                df.select_dtypes(include=np.number).describe()
+                )
+
         # =================================================
         # ITEM 10
         # =================================================
+        
+        with tabs[9]:
 
+            st.header("Ítem 10: Hallazgos Clave")
+
+            col1, col2 = st.columns(2)
+
+        with col1:
+
+            st.metric(
+                "Registros",
+                df.shape[0])
+
+            st.metric(
+                "Variables",
+                df.shape[1])
+
+        with col2:
+
+            if "y" in df.columns:
+
+                aceptacion = round(
+                    (df["y"]=="yes").mean()*100,
+                    2)
+
+                st.metric(
+                    "Tasa de Aceptación (%)",
+                    aceptacion)
+
+        st.success("""
+        Hallazgos sugeridos:
+
+        • Identificar los grupos con mayor aceptación de campañas.
+
+        • Detectar variables con diferencias importantes entre clientes que aceptan y no aceptan.
+
+        • Analizar la influencia de la duración de la llamada.
+
+        • Evaluar el comportamiento según nivel educativo y canal de contacto.
+
+        • Generar recomendaciones para optimizar futuras campañas.
+        """)
 
         
