@@ -203,7 +203,12 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
             "Clasificación Variables",
             "Estadísticas",
             "Valores Faltantes",
-            "Distribuciones"
+            "Distribuciones",
+            "Variables Categóricas",
+            "Numérico vs Categórico",
+            "Categórico vs Categórico",
+            "Análisis Dinámico",
+            "Hallazgos"
         ])
 
         # =================================================
@@ -347,11 +352,56 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
                 data=df,
                 x=variable,
                 kde=True,
-                ax=ax
-            )
+                ax=ax)
 
             st.pyplot(fig)
 
             st.success(
                 f"Distribución observada para la variable: {variable}"
             )
+        # =================================================
+        # ITEM 6
+        # =================================================
+        with tabs[5]:
+            st.header("Ítem 6: Análisis de Variables Categóricas")
+            categoricas = analyzer.variables_categoricas()
+            variable_cat = st.selectbox(
+                            "Seleccione una variable categórica",
+                             categoricas )
+
+            conteo = df[variable_cat].value_counts()
+
+            st.subheader("Conteos")
+            st.dataframe(conteo)
+
+            st.subheader("Proporciones (%)")
+            st.dataframe(
+                round(df[variable_cat].value_counts(normalize=True)*100,2)
+                )
+
+            fig, ax = plt.subplots(figsize=(10,5))
+
+            sns.countplot(
+            data=df,
+            x=variable_cat,
+            order=conteo.index,
+            ax=ax )
+
+            plt.xticks(rotation=45)
+
+            st.pyplot(fig)
+        # =================================================
+        # ITEM 7
+        # =================================================
+        # =================================================
+        # ITEM 8
+        # =================================================
+        # =================================================
+        # ITEM 9
+        # =================================================
+        # =================================================
+        # ITEM 10
+        # =================================================
+
+
+        
