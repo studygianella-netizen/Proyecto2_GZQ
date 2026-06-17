@@ -32,19 +32,24 @@ Requisitos Previos
 
 Antes de ejecutar la aplicación, asegúrese de tener instalado:
 
-Python 3.10 o superior
-Git (opcional, para clonar el repositorio)
+- Python 3.10 o superior
 
-1. Clonar el repositorio
+- Git (opcional, para clonar el repositorio)
+
+1. Clonar el repositorio:
+   
 git clone https://github.com/studygianella-netizen/Proyecto2_GZQ.git
 
-3. Ingresar a la carpeta del proyecto
+2. Ingresar a la carpeta del proyecto:
+   
 cd Proyecto2_GZQ
 
-5. Instalar las dependencias
+3. Instalar las dependencias:
+   
 pip install -r requirements.txt
 
-7. Ejecutar la aplicación
+4. Ejecutar la aplicación:
+   
 streamlit run app.py
 
 ---
@@ -57,8 +62,4 @@ https://github.com/studygianella-netizen/Proyecto2_GZQ
 ### Aplicación Streamlit
 https://proyecto2gzq-bggtfqfapa2gnvki4copa5.streamlit.app/
 
----
 
-## 📌 Conclusión
-
-El desarrollo de este proyecto permitió aplicar conceptos de análisis exploratorio de datos, estadística descriptiva, visualización de información y programación orientada a objetos mediante la construcción de una aplicación interactiva orientada a la toma de decisiones basada en datos.
