@@ -52,12 +52,10 @@ streamlit run app.py
 ## 🔗 Links Relevantes
 
 ### Repositorio GitHub
-
-PEGAR_LINK_GITHUB
+https://github.com/studygianella-netizen/Proyecto2_GZQ
 
 ### Aplicación Streamlit
-
-PEGAR_LINK_STREAMLIT
+https://proyecto2gzq-bggtfqfapa2gnvki4copa5.streamlit.app/
 
 ---
 
