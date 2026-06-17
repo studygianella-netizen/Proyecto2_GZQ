@@ -28,6 +28,7 @@ La aplicación fue desarrollada como parte de la **Especialización en Python Po
 ---
 
 ▶️ Instrucciones de Ejecución
+
 Requisitos Previos
 
 Antes de ejecutar la aplicación, asegúrese de tener instalado:
