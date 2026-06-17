@@ -524,21 +524,17 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
             st.header("Factores Asociados a la Aceptación de la Campaña")
 
             if "y" in df.columns:
-
-               tasa_aceptacion = round(
+                tasa_aceptacion = round(
                       (df["y"] == "yes").mean() * 100,
                        2
                 )
-
-               st.metric(
+                st.metric(
                       "Tasa General de Aceptación",
                       f"{tasa_aceptacion}%"
                       )
-
-               st.divider()
-
-               st.subheader("Aceptación por Nivel Educativo")
-
+                st.divider()
+                
+                st.subheader("Aceptación por Nivel Educativo")
                 educacion = pd.crosstab(
                     df["education"],
                     df["y"],
