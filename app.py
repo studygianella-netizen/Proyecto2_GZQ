@@ -65,8 +65,7 @@ class DataAnalyzer:
             y=variable,
             ax=ax
         )
-
-    return fig
+        return fig
     
     def histograma(self, variable):
 
