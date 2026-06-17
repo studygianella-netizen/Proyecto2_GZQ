@@ -3,7 +3,7 @@
 
 ## 📌 Descripción del Proyecto
 
-Este proyecto consiste en el desarrollo de una aplicación interactiva utilizando **Streamlit** para realizar un **Análisis Exploratorio de Datos (EDA)** sobre el dataset **Bank Marketing**.
+Este proyecto consiste en el desarrollo de una aplicación interactiva utilizando **Python** y **Streamlit** para realizar un **Análisis Exploratorio de Datos (EDA)** sobre el dataset **Bank Marketing**.
 
 El objetivo principal es explorar, visualizar y analizar las características de los clientes de una institución financiera, identificando patrones y relaciones relevantes que permitan comprender mejor el comportamiento de aceptación de campañas de marketing.
 
@@ -27,25 +27,25 @@ La aplicación fue desarrollada como parte de la **Especialización en Python Po
 
 ---
 
-## ▶️ Instrucciones de Ejecución
+▶️ Instrucciones de Ejecución
+Requisitos Previos
 
-### 1. Clonar repositorio
+Antes de ejecutar la aplicación, asegúrese de tener instalado:
 
-```bash
-git clone URL_DEL_REPOSITORIO
-```
+Python 3.10 o superior
+Git (opcional, para clonar el repositorio)
 
-### 2. Instalar dependencias
+1. Clonar el repositorio
+git clone https://github.com/studygianella-netizen/Proyecto2_GZQ.git
 
-```bash
+3. Ingresar a la carpeta del proyecto
+cd Proyecto2_GZQ
+
+5. Instalar las dependencias
 pip install -r requirements.txt
-```
 
-### 3. Ejecutar aplicación
-
-```bash
+7. Ejecutar la aplicación
 streamlit run app.py
-```
 
 ---
 
