@@ -56,7 +56,18 @@ class DataAnalyzer:
 
     def moda(self):
         return self.df.mode().iloc[0]
-        
+    
+    def boxplot_grupos(self, variable):
+        fig, ax = plt.subplots(figsize=(8,5))
+        sns.boxplot(
+            data=self.df,
+            x="y",
+            y=variable,
+            ax=ax
+        )
+
+    return fig
+    
     def histograma(self, variable):
 
         fig, ax = plt.subplots(figsize=(8,4))
@@ -227,8 +238,9 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
             "Numérico vs Categórico",
             "Categórico vs Categórico",
             "Análisis Dinámico",
+            "Factores de Aceptación",
             "Hallazgos"
-        ])
+            ])
 
         # =================================================
         # ITEM 1
@@ -433,7 +445,9 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
                     y=variable_num,
                     ax=ax)
 
-                st.pyplot(fig)
+                st.pyplot(
+                    analyzer.boxplot_grupos(variable_num)
+                )
 
                 st.info(
                     f"Comparación de {variable_num} respecto a la aceptación de la campaña." )
@@ -467,6 +481,7 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
                 ax=ax)
 
             st.pyplot(fig)
+
         # =================================================
         # ITEM 9
         # =================================================
@@ -501,83 +516,114 @@ elif opcion == "📊 Análisis Exploratorio (EDA)":
                 )
 
         # =================================================
-        # ITEM 10
+        # Item 10
         # =================================================
+
         with tabs[9]:
 
+            st.header("Factores Asociados a la Aceptación de la Campaña")
+
+            if "y" in df.columns:
+
+               tasa_aceptacion = round(
+                      (df["y"] == "yes").mean() * 100,
+                       2
+                )
+
+               st.metric(
+                      "Tasa General de Aceptación",
+                      f"{tasa_aceptacion}%"
+                      )
+
+               st.divider()
+
+               st.subheader("Aceptación por Nivel Educativo")
+
+                educacion = pd.crosstab(
+                    df["education"],
+                    df["y"],
+                    normalize="index"
+                ) * 100
+
+                st.dataframe(
+                        educacion.round(2)
+                        )
+
+                st.subheader("Aceptación por Canal de Contacto")
+
+                contacto = pd.crosstab(
+                    df["contact"],
+                    df["y"],
+                    normalize="index"
+                ) * 100
+
+                st.dataframe(
+                    contacto.round(2)
+                    )
+
+                st.subheader("Aceptación por Estado Civil")
+
+                marital = pd.crosstab(
+                    df["marital"],
+                    df["y"],
+                    normalize="index"
+                ) * 100
+
+                st.dataframe(
+                    marital.round(2)
+                )
+
+                st.info("""
+                Este análisis permite identificar qué segmentos de clientes
+                presentan mayores niveles de aceptación y pueden ser priorizados
+                en futuras campañas de marketing.
+                """)
+        
+        # =================================================
+        # ITEM 11
+        # =================================================
+        with tabs[10]:
+
             st.header("Ítem 10: Hallazgos Clave")
+
+            aceptacion = round(
+                (df["y"] == "yes").mean() * 100,
+                2
+            )
 
             col1, col2, col3 = st.columns(3)
 
             with col1:
                 st.metric(
-                    "Registros",
+                    "Clientes",
                     df.shape[0])
 
             with col2:
                 st.metric(
-                "Variables",
-                df.shape[1])
+                    "Variables",
+                    df.shape[1])
 
             with col3:
-
-                if "y" in df.columns:
-
-                    aceptacion = round(
-                        (df["y"] == "yes").mean() * 100,
-                        2
-                        )
-
-                    st.metric(
-                        "Aceptación",
-                        f"{aceptacion}%"
-                        )
-
-            st.divider()
-
-            st.subheader("Indicadores Estadísticos")
-
-            c1, c2 = st.columns(2)
-
-            with c1:
-
                 st.metric(
-                    "Edad Promedio",
-                    round(df["age"].mean(),2)
-                    )
-
-                st.metric(
-                    "Edad Mediana",
-                    round(df["age"].median(),2)
-                    )
-
-            with c2:
-
-                st.metric(
-                    "Duración Promedio",
-                    round(df["duration"].mean(),2)
-                    )
-
-            st.metric(
-                "Duración Mediana",
-                round(df["duration"].median(),2)
+                    "Aceptación",
+                    f"{aceptacion}%"
                 )
 
-            st.divider()
+                st.divider()
 
-            st.success("""
-            Hallazgos principales:
+                st.subheader("Principales Insights")
 
-            • La edad presenta una distribución amplia entre los clientes.
+                st.success("""
+                1. La duración del contacto presenta diferencias entre clientes que aceptan y no aceptan la campaña.
 
-            • La duración del contacto es una de las variables más relevantes del dataset.
+                2. Existen segmentos específicos de clientes con mayores niveles de aceptación.
 
-            • Existen diferencias entre los grupos que aceptan y no aceptan la campaña.
+                3. Algunos canales de comunicación muestran mejores resultados que otros.
 
-            • Algunas categorías muestran comportamientos distintos frente a la aceptación.
+                4. Las características demográficas y socioeconómicas influyen en la respuesta de los clientes.
 
-            • El análisis exploratorio permite identificar segmentos de clientes con mayor potencial para futuras campañas.
-            """)
+                5. El análisis exploratorio permite identificar oportunidades para optimizar futuras campañas de marketing.
+                """)
 
 elif opcion == "📌 Conclusiones":
 
